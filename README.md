@@ -9,7 +9,7 @@ Let's read the [documents](https://api.datpmt.com) before using it.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'google-translate-free'
+gem 'google-translate-free', '~> 0.0.2'
 ```
 
 And then execute:
