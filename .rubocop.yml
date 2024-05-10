@@ -3,4 +3,4 @@ AllCops:
   NewCops: enable
   DefaultFormatter: progress
   Exclude:
-    - 'bin/**/*'
+    - 'Gemfile.lock'

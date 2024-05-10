@@ -1,9 +1,11 @@
 require 'cgi'
 require 'net/http'
 require 'json'
+require_relative 'translate_lib/validation'
 
 module Translate
   def self.translate(string, to_lang, from_lang = :auto)
+    validate_language_code(from_lang, to_lang)
     encode = encode_url(string)
     uri = URI("https://translate.googleapis.com/translate_a/t?client=gtx&sl=#{from_lang}&tl=#{to_lang}&dt=t&q=#{encode}")
     result = net_get(uri)&.first
@@ -11,6 +13,7 @@ module Translate
   end
 
   def self.alternate_translations(string, to_lang, from_lang = :auto)
+    validate_language_code(from_lang, to_lang)
     uri = URI(url(:at, encode_url(string), from_lang, to_lang))
     result = net_get(uri).dig(5, 0, 2)
     return if result.nil?
@@ -39,14 +42,6 @@ module Translate
     uri = URI(url(:ss, keyword, :auto))
     result = net_get(uri)[11]
     return if result.nil?
-
-    # rs_response = result.find { |preposition, arr| pre == preposition }
-    #                  &.last
-    #                  &.map { |arr| arr[0] if arr[1] == code }
-    #                  &.compact
-    #                  &.join(', ')
-
-    # rs_response unless rs_response.nil? || rs_response.empty?
 
     rs_response = ''
 
@@ -102,6 +97,7 @@ module Translate
   end
 
   def self.encode_url(string)
+    TranslateLib::Validation.validate_string(string)
     CGI.escape(string)
   end
 
@@ -112,5 +108,11 @@ module Translate
 
     response = http.request(request)
     JSON.parse(response.body)
+  rescue StandardError => e
+    raise StandardError, e.message
+  end
+
+  def self.validate_language_code(from_lang, to_lang)
+    TranslateLib::Validation.validate_language_code(from_lang, to_lang)
   end
 end
