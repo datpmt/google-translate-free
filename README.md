@@ -81,14 +81,9 @@ Translate.see_more('summers')
 # => "summer"
 ```
 
-## License
-
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
 ## Contributors
 
 - [datpmt](https://github.com/datpmt)
 
 ## License
-Copyright (c) 2021 datpmt.
-This project is licensed under the [MIT License](LICENSE).
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'google-translate-free'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.summary     = 'Google Translate Free'
   s.description = 'Google Translate Free'
   s.authors     = ['datpmt']
