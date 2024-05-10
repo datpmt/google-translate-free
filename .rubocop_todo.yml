@@ -1,0 +1,66 @@
+Bundler/OrderedGems:
+  Exclude:
+    - 'Gemfile'
+
+Metrics/AbcSize:
+  Max: 51
+
+Metrics/BlockLength:
+  Max: 74
+
+Metrics/ClassLength:
+  Max: 180
+Metrics/ModuleLength:
+  Max: 180
+
+Metrics/CyclomaticComplexity:
+  Max: 9
+
+Metrics/MethodLength:
+  Max: 40
+
+Metrics/PerceivedComplexity:
+  Max: 9
+
+Style/ClassAndModuleChildren:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/ExpandPathArguments:
+  Exclude:
+    - 'bin/bundle'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/HashSyntax:
+  Description: >-
+                 Prefer Ruby 1.9 hash syntax { a: 1, b: 2 } over 1.8 syntax
+                 { :a => 1, :b => 2 }.
+  StyleGuide: '#hash-literals'
+  Enabled: true
+  EnforcedStyle: ruby19
+  UseHashRocketsWithSymbolValues: false
+  PreferHashRocketsForNonAlnumEndingSymbols: false
+
+Style/IfUnlessModifier:
+  Exclude:
+    - 'bin/bundle'
+
+
+Style/PerlBackrefs:
+  Exclude:
+    - 'bin/bundle'
+
+
+
+Style/StringLiterals:
+  Enabled: true
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Layout/LineLength:
+  Max: 198
