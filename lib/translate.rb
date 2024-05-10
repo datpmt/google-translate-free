@@ -68,8 +68,7 @@ module Translate
                 result[0].map { |ex| ex[0] if ex.last == code }.compact
               end
     last_rs.map do |ex|
-      ex = ex.gsub('<b>', "<b style='color: #ffc017'>").capitalize
-      "#{ex}."
+      "#{ex.capitalize}."
     end
   end
 
