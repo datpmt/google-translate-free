@@ -85,5 +85,13 @@ Translate.see_more('summers')
 
 - [datpmt](https://github.com/datpmt)
 
+I welcome contributions to this project.
+
+1.  Fork it.
+2.  Create your feature branch (`git checkout -b your-feature`).
+3.  Commit your changes (`git commit -am 'Add some feature'`).
+4.  Push to the branch (`git push origin your-feature`).
+5.  Create a new pull request.
+
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
