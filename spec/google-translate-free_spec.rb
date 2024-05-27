@@ -24,6 +24,33 @@ RSpec.describe Translate do
     end
   end
 
+  context 'For alternate Translations' do
+    it 'Translate auto detect language' do
+      result = Translate.alternate_translations('how about you?', :vi)
+      expect(result).to be_a(Array)
+      expect(result).not_to be_empty
+    end
+
+    it 'Translate with source language' do
+      result = Translate.alternate_translations('how about you?', :vi, :en)
+      expect(result).to be_a(Array)
+      expect(result).not_to be_empty
+    end
+
+    it 'Raises an exception for param string over 5000 characters' do
+      param = 'a' * 5001
+      expect { Translate.translate(param, :vi) }.to raise_error(TranslateLib::Exception, 'Translate strings shorter than or equal to 5000 characters.')
+    end
+
+    it 'Raises an exception for invalid language code' do
+      expect { Translate.translate('summer', :viii) }.to raise_error(TranslateLib::Exception, 'to_lang does not have a valid value.')
+    end
+
+    it 'Raises an exception for invalid language code' do
+      expect { Translate.translate('summer', :vi, :ennn) }.to raise_error(TranslateLib::Exception, 'from_lang does not have a valid value.')
+    end
+  end
+
   context 'Definitions' do
     it 'For definitions' do
       result = Translate.definitions('summer')
