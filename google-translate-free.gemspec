@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name        = 'google-translate-free'
-  s.version     = '0.0.2'
-  s.summary     = 'Google Translate Free'
-  s.description = 'Google Translate Free'
+  s.version     = '1.0'
+  s.summary     = 'Supports APIs related to Google Translate and more!'
+  s.description = 'Translation service designed to help you with a variety of language-based features including direct translations, alternate translations, definitions, examples, transliterations, spelling suggestions, language detection, and highly relevant keyword suggestions.'
   s.authors     = ['datpmt']
   s.email       = 'datpmt.2k@gmail.com'
   s.files       = Dir['CHANGELOG.md', 'LICENSE', 'README.md', 'examples/**/*', 'lib/**/*', 'bin/*']
