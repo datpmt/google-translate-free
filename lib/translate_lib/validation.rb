@@ -20,9 +20,17 @@ module TranslateLib
       raise_error!('Translate strings shorter than or equal to 5000 characters.') if string.length > 5000
     end
 
+    def self.validate_keyword(keyword)
+      raise_error!('keyword does not have a valid value.') unless single_word?(keyword)
+    end
+
     def self.validate_language_code(from_lang, to_lang)
       raise_error!('from_lang does not have a valid value.') unless ALLOW_LANGUAGE_CODE.include?(from_lang.to_s.downcase)
       raise_error!('to_lang does not have a valid value.') unless ALLOW_LANGUAGE_CODE.include?(to_lang.to_s.downcase)
+    end
+
+    def self.single_word?(str)
+      !!(str =~ /^\p{L}+$/)
     end
 
     def self.raise_error!(message)

@@ -22,6 +22,7 @@ module Translate
   end
 
   def self.definitions(keyword)
+    validate_keyword(keyword)
     # [ preposition: [desc ex sysnonyms] ]
     uri = URI(url(:md, keyword, :auto))
     result = net_get(uri)[12]
@@ -32,7 +33,7 @@ module Translate
       {
         "#{pre}": preposition[1].map do |arr|
           code = arr.last
-          [arr[0].capitalize, examples(keyword, code)&.first, synonyms(pre, keyword, code)]
+          [arr[0], examples(keyword, code)&.first, synonyms(pre, keyword, code)]
         end
       }
     end
@@ -53,6 +54,7 @@ module Translate
   end
 
   def self.examples(keyword, code = nil)
+    validate_keyword(keyword)
     uri = URI(url(:ex, keyword, :auto))
     result = net_get(uri)[13]
     return unless result
@@ -63,13 +65,13 @@ module Translate
                 result[0].map { |ex| ex[0] if ex.last == code }.compact
               end
     last_rs.map do |ex|
-      "#{ex.capitalize}."
+      "#{ex}."
     end
   end
 
-  def self.transliteration(string)
-    encode = encode_url(string)
-    uri = URI(url(:rm, encode, :auto))
+  def self.transliteration(keyword)
+    validate_keyword(keyword)
+    uri = URI(url(:rm, keyword, :auto))
     net_get(uri)&.dig(0, 0, 3)
   end
 
@@ -81,8 +83,8 @@ module Translate
 
   def self.see_more(keyword)
     # ex [kids -> kid, tables -> table]
-    encode = encode_url(keyword)
-    uri = URI(url(:rw, encode, :auto))
+    validate_keyword(keyword)
+    uri = URI(url(:rw, keyword, :auto))
     net_get(uri)&.dig(14, 0, 0) || keyword
   end
 
@@ -114,5 +116,9 @@ module Translate
 
   def self.validate_language_code(from_lang, to_lang)
     TranslateLib::Validation.validate_language_code(from_lang, to_lang)
+  end
+
+  def self.validate_keyword(keyword)
+    TranslateLib::Validation.validate_keyword(keyword)
   end
 end
