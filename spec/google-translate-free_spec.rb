@@ -14,6 +14,14 @@ RSpec.describe Translate do
       param = 'a' * 5001
       expect { Translate.translate(param, :vi) }.to raise_error(TranslateLib::Exception, 'Translate strings shorter than or equal to 5000 characters.')
     end
+
+    it 'Raises an exception for invalid language code' do
+      expect { Translate.translate('summer', :viii) }.to raise_error(TranslateLib::Exception, 'to_lang does not have a valid value.')
+    end
+
+    it 'Raises an exception for invalid language code' do
+      expect { Translate.translate('summer', :vi, :ennn) }.to raise_error(TranslateLib::Exception, 'from_lang does not have a valid value.')
+    end
   end
 
   context 'Definitions' do
