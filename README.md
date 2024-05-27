@@ -31,6 +31,26 @@ Without third params, Google Translate will auto-detect your source language.
 Translate.translate('summer', :vi)
 # => "mùa hè"
 ```
+For alternate Translations
+```ruby
+Translate.alternate_translations('summer', :vi, :en)
+# =>
+#[
+#  "mùa hè",
+#  "mùa hạ",
+#  "hè"
+#]
+```
+Without third params, Google Translate will auto-detect your source language.
+```ruby
+Translate.alternate_translations('summer', :vi)
+# =>
+#[
+#  "mùa hè",
+#  "mùa hạ",
+#  "hè"
+#]
+```
 For definitions
 ```ruby
 Translate.definitions('summer')
