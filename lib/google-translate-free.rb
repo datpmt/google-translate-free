@@ -4,6 +4,8 @@ require 'json'
 require_relative 'translate_lib/validation'
 
 module Translate
+  VERSION = '1.0.1'.freeze
+
   def self.translate(string, to_lang, from_lang = :auto)
     validate_language_code(from_lang, to_lang)
     encode = encode_url(string)
@@ -77,7 +79,7 @@ module Translate
 
   def self.suggest(string)
     encode = encode_url(string)
-    uri = URI(url(:qca, encode, :auto))
+    uri = URI(url(:qca, encode, :auto, detection(string).first == 'en' ? :vi : :en))
     net_get(uri)&.dig(7, 1) || string
   end
 
@@ -89,7 +91,7 @@ module Translate
   end
 
   def self.detection(string)
-    uri = URI("https://translate.google.com/translate_a/single?client=gtx&sl=auto&q=#{encode_url(string)}")
+    uri = URI(url(:rm, encode_url(string), :auto))
     response = net_get(uri)
     [response&.dig(2), response&.dig(6)]
   end
