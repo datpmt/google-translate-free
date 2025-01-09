@@ -1,0 +1,21 @@
+name: Check Typos
+
+on: [pull_request]
+
+jobs:
+  typocop:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run Typocop Action
+        uses: datpmt/typocop@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pull_request_id: ${{ github.event.pull_request.number }}
+          github_base_ref: ${{ github.base_ref }}
+          setting: .github/typocop/setting.yml
